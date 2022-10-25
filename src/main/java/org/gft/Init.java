@@ -16,7 +16,7 @@
  *
  */
 
-package org.streampipes;
+package org.gft;
 
 import org.apache.streampipes.container.extensions.ExtensionsModelSubmitter;
 import org.apache.streampipes.container.model.SpServiceDefinition;
@@ -29,8 +29,8 @@ import org.apache.streampipes.messaging.jms.SpJmsProtocolFactory;
 import org.apache.streampipes.messaging.kafka.SpKafkaProtocolFactory;
 import org.apache.streampipes.messaging.mqtt.SpMqttProtocolFactory;
 
-import org.streampipes.pe.data.GeofencingProcessor;
-import org.streampipes.pe.data.ExampleDataSink;
+import org.gft.processor.geofencing.GeofencingProcessor;
+import org.gft.processor.geofencing.DataSink;
 
 public class Init extends ExtensionsModelSubmitter {
 
@@ -44,7 +44,7 @@ public class Init extends ExtensionsModelSubmitter {
                     "human-readable service name",
                     "human-readable service description", 8090)
             .registerPipelineElement(new GeofencingProcessor())
-            .registerPipelineElement(new ExampleDataSink())
+            .registerPipelineElement(new DataSink())
             .registerMessagingFormats(
                     new JsonDataFormatFactory(),
                     new CborDataFormatFactory(),

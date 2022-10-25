@@ -16,7 +16,7 @@
  *
  */
 
-package org.streampipes.pe.data;
+package org.gft.processor.geofencing;
 
 import org.apache.streampipes.commons.exceptions.SpRuntimeException;
 import org.apache.streampipes.model.DataProcessorType;
@@ -42,7 +42,7 @@ public class GeofencingProcessor extends StreamPipesDataProcessor {
 
   @Override
   public DataProcessorDescription declareModel() {
-    return ProcessingElementBuilder.create("org.streampipes.pe.date.geofencingprocessor", "Geofencing", "A simple geofencing data org.streampipes.pe.date.geofencingprocessor")
+    return ProcessingElementBuilder.create("org/gft/processor/geofencing", "Geofencing", "A simple geofencing data org.gft.pe.date.org.gft.pe.processor.geofencing")
             .category(DataProcessorType.ENRICH)
             .withAssets(Assets.DOCUMENTATION, Assets.ICON)
             .withLocales(Locales.EN)

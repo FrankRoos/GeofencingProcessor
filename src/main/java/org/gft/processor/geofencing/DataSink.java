@@ -16,7 +16,7 @@
  *
  */
 
-package org.streampipes.pe.data;
+package org.gft.processor.geofencing;
 
 import org.apache.streampipes.commons.exceptions.SpRuntimeException;
 import org.apache.streampipes.model.DataSinkType;
@@ -33,7 +33,7 @@ import org.apache.streampipes.wrapper.standalone.SinkParams;
 import org.apache.streampipes.wrapper.standalone.StreamPipesDataSink;
 
 
-public class ExampleDataSink extends StreamPipesDataSink {
+public class DataSink extends StreamPipesDataSink {
 
 private String exampleText;
 
@@ -41,7 +41,7 @@ private static final String EXAMPLE_KEY = "example-key";
 
   @Override
   public DataSinkDescription declareModel(){
-          return DataSinkBuilder.create("org.example.pe.example.sink")
+          return DataSinkBuilder.create("org.gft.pe.processor.sink")
           .withAssets(Assets.DOCUMENTATION,Assets.ICON)
           .withLocales(Locales.EN)
           .category(DataSinkType.UNCATEGORIZED)

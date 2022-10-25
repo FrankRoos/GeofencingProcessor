@@ -1,0 +1,7 @@
+org.gft.pe.data.processor.title= Geofencing
+org.gft.pe.data.processor.description=Description of data processor
+
+example-key.title=Example Text Parameter
+example-key.description=Example Text Parameter Description
+latitude-center.title = Input
+latitude-center.description = Description
