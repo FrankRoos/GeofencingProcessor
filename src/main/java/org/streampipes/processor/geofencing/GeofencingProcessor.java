@@ -16,7 +16,7 @@
  *
  */
 
-package org.gft.processor.geofencing;
+package org.streampipes.processor.geofencing;
 
 import org.apache.streampipes.commons.exceptions.SpRuntimeException;
 import org.apache.streampipes.model.DataProcessorType;
@@ -34,45 +34,48 @@ import org.apache.streampipes.wrapper.standalone.ProcessorParams;
 import org.apache.streampipes.wrapper.standalone.StreamPipesDataProcessor;
 
 public class GeofencingProcessor extends StreamPipesDataProcessor {
-  private static final String LATITUDE_CENTER = "latitude-center";
-  private static final String LONGITUDE_CENTER = "longitude-center";
-  private float centerLatitude;
-  private float centerLongitude;
+  private static final String LATITUDE= "latitude";
+  private static final String LONGITUDE= "longitude";
+
+  private static final String LATITUDE_CENTER= "latitude_center";
+  private static final String LONGITUDE_CENTER= "longitude_center";
+  private static final String RADIUS= "radius";
+  private float latitude_center;
+  private float longitude_center;
   private int radius;
 
   @Override
   public DataProcessorDescription declareModel() {
-    return ProcessingElementBuilder.create("org/gft/processor/geofencing", "Geofencing", "A simple geofencing data org.gft.pe.date.org.gft.pe.processor.geofencing")
+    return ProcessingElementBuilder.create("org.streampipes.processor.geofencing", "Geofencing", "A simple org.streampipes.processor.o data")
             .category(DataProcessorType.ENRICH)
             .withAssets(Assets.DOCUMENTATION, Assets.ICON)
             .withLocales(Locales.EN)
             .requiredStream(StreamRequirementsBuilder.create()
                     .requiredPropertyWithUnaryMapping(EpRequirements.domainPropertyReq(Geo.lat),
-                            Labels.withId(LATITUDE_CENTER), PropertyScope.MEASUREMENT_PROPERTY)
+                            Labels.withId(LATITUDE), PropertyScope.MEASUREMENT_PROPERTY)
                     .requiredPropertyWithUnaryMapping(EpRequirements.domainPropertyReq(Geo.lng),
-                            Labels.from("longitude-field", "Longitude", "The event " +
-                                    "property containing the longitude value"), PropertyScope.MEASUREMENT_PROPERTY)
+                            Labels.withId(LONGITUDE), PropertyScope.MEASUREMENT_PROPERTY)
                     .build())
-            .requiredIntegerParameter("radius", "Geofence Size", "The size of the circular geofence in meters.", 0, 1000, 1)
-            .requiredFloatParameter(Labels.from(LATITUDE_CENTER, "Latitude", "The latitude value"))
-            .requiredFloatParameter(Labels.from(LONGITUDE_CENTER, "Longitude", "The longitude value"))
+            .requiredIntegerParameter(Labels.withId(RADIUS), 0, 1000, 1)
+            .requiredFloatParameter(Labels.withId(LATITUDE_CENTER))
+            .requiredFloatParameter(Labels.withId(LONGITUDE_CENTER))
             .outputStrategy(OutputStrategies.keep())
             .build();
   }
 
   @Override
   public void onInvocation(ProcessorParams parameters, SpOutputCollector spOutputCollector, EventProcessorRuntimeContext runtimeContext) throws SpRuntimeException {
-    this.centerLatitude = parameters.extractor().singleValueParameter(LATITUDE_CENTER, Float.class);
-    this.centerLongitude = parameters.extractor().singleValueParameter(LONGITUDE_CENTER, Float.class);
-    this.radius = parameters.extractor().singleValueParameter("radius", Integer.class);
+    this.latitude_center = parameters.extractor().singleValueParameter(LATITUDE_CENTER, Float.class);
+    this.longitude_center = parameters.extractor().singleValueParameter(LONGITUDE_CENTER, Float.class);
+    this.radius = parameters.extractor().singleValueParameter(RADIUS, Integer.class);
   }
 
   @Override
   public void onEvent(Event event, SpOutputCollector collector) throws SpRuntimeException {
-    float latitude = event.getFieldBySelector(LATITUDE_CENTER).getAsPrimitive().getAsFloat();
-    float longitude = event.getFieldBySelector(LONGITUDE_CENTER).getAsPrimitive().getAsFloat();
+    float latitude = event.getFieldBySelector(LATITUDE).getAsPrimitive().getAsFloat();
+    float longitude = event.getFieldBySelector(LONGITUDE).getAsPrimitive().getAsFloat();
 
-    float distance = distFrom(latitude, longitude, centerLatitude, centerLongitude);
+    float distance = distFrom(latitude, longitude, latitude_center, longitude_center);
 
     if (distance <= radius) {
       collector.collect(event);

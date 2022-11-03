@@ -63,7 +63,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>org.gft.Init</mainClass>
+                            <mainClass>org.streampipes.Init</mainClass>
                         </configuration>
                     </execution>
                 </executions>

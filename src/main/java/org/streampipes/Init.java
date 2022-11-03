@@ -16,7 +16,7 @@
  *
  */
 
-package org.gft;
+package org.streampipes;
 
 import org.apache.streampipes.container.extensions.ExtensionsModelSubmitter;
 import org.apache.streampipes.container.model.SpServiceDefinition;
@@ -29,8 +29,8 @@ import org.apache.streampipes.messaging.jms.SpJmsProtocolFactory;
 import org.apache.streampipes.messaging.kafka.SpKafkaProtocolFactory;
 import org.apache.streampipes.messaging.mqtt.SpMqttProtocolFactory;
 
-import org.gft.processor.geofencing.GeofencingProcessor;
-import org.gft.processor.geofencing.DataSink;
+import org.streampipes.processor.geofencing.GeofencingProcessor;
+import org.streampipes.processor.geofencing.DataSink;
 
 public class Init extends ExtensionsModelSubmitter {
 

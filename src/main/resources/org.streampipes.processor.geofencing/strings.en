@@ -1,0 +1,18 @@
+org.streampipes.processor.geofencing.title= Geofencing
+org.streampipes.processor.geofencing.description= Receive geospatial coordinates in form of a latitude/longitude pair and fire an event every time the GPS location is inside the geofence.
+
+
+latitude.title = Latitude
+latitude.description = The event property containing the latitude value
+
+longitude.title = Longitude
+longitude.description = The event property containing the longitude value
+
+radius.title = Geofence Size
+radius.description = The size of the circular geofence in meters.
+
+latitude_center.title = Center Latitude
+latitude_center.description = Insert the latitude value of the geofence center
+
+longitude_center.title = Center Longitude
+longitude_center.description = Insert The longitude value of the geofence center

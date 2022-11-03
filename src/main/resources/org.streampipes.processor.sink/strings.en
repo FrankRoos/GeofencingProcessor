@@ -1,0 +1,5 @@
+org.streampipes.pe.processor.sink.title=ExampleSink
+org.streampipes.pe.processor.sink.description=Description of data processor
+
+example-key.title=Example Text Parameter
+example-key.description=Example Text Parameter Description
